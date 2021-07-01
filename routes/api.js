@@ -18,7 +18,6 @@ router.get('/portfolio', async function(req, res, next) {
 router.post('/portfolio', async function(req, res, next) {
     console.log('.the req.body is', req.body)
     let item = await Portfolio.create(req.body)
-
     res.json(item)
 });
 
