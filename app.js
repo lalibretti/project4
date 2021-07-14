@@ -1,10 +1,11 @@
 var createError = require('http-errors');
+var cors = require('cors')
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('./lib/models')
-var cors = require('cors')
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,6 +13,8 @@ var apiRouter = require('./routes/api')
 
 var app = express();
 app.use(cors())
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,8 +30,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/v1', apiRouter);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`listening on ${PORT}`));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,5 +46,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
